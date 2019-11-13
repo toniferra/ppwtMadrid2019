@@ -1,0 +1,64 @@
+Inbound_Calls
+Waiting_Now
+Transfer_Calls
+Abandoned_Calls
+Answered_Calls
+logtime
+
+
+----------------------
+
+Agente
+Estado
+Tiempo_Estado
+logtime
+
+
+----------------------
+
+Direct Query
+
+Advance Card
+
+L. Estado = SWITCH(Agents[Estado];
+                    1; "En llamada";
+                    2; "Disponible";
+                    3; "Parado")
+					
+Tiempo = RIGHT("00" & ROUND(DIVIDE(Agents[Tiempo_Estado];60);0);2) & ":" & RIGHT("00"& mod(Agents[Tiempo_Estado];60);2) 	
+
+------------
+KPIS
+
+Abandoned Calls = 
+var mf= max(RealTimeData[logtime])
+return CALCULATE(max(RealTimeData[Abandoned_Calls]);RealTimeData[logtime]= mf)
+
+
+Answered Calls = 
+var mf= max(RealTimeData[logtime])
+return CALCULATE(max(RealTimeData[Answered_Calls]);RealTimeData[logtime]= mf)
+
+
+Level = DIVIDE([Answered Calls]; [Abandoned Calls]+[Answered Calls])
+------------
+Agentes
+
+L. Estado = 
+var mf= max(RealTimeData[logtime])
+var Estado = CALCULATE(max(RealTimeData[ESTADO]);RealTimeData[logtime]= mf)
+return SWITCH(Estado;
+                    1; "En llamada";
+                    2; "Disponible";
+                    3; "Parado")
+
+
+lin Estado = 
+var mf= max(RealTimeData[logtime])
+return CALCULATE(max(RealTimeData[ESTADO]);RealTimeData[logtime]= mf)		
+
+
+Tiempo = 
+var mf = max(RealTimeData[logtime])
+var t = CALCULATE(max(RealTimeData[Tiempo_Estado]);RealTimeData[logtime] = mf)
+return RIGHT("00" & ROUND(DIVIDE(t;60);0);2) & ":" & RIGHT("00"& mod(t;60);2) 	
