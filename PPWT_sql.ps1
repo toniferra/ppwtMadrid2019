@@ -1,5 +1,5 @@
 ﻿$sqlConn = New-Object System.Data.SqlClient.SqlConnection
-$sqlConn.ConnectionString = “Server=masterdata360.database.windows.net;Initial Catalog=PPWT;Persist Security Info=False;User ID=masteruser;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Password=mdata2019+;Connection Timeout=30;"
+$sqlConn.ConnectionString = “Server=server.database.windows.net;Initial Catalog=PPWT;Persist Security Info=False;User ID=masteruser;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Password=XXXXXXX;Connection Timeout=30;"
 
 
 $sqlConn.Open()
